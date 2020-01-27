@@ -15,7 +15,11 @@ server.post('/projects', (req, res) => {
   }; // Objeto que guarda informações do projeto.
   projects.push(project); // Adiciona o projeto ao array de projetos.
 
-  return res.json(projects);
+  return res.json(projects); // Retorna uma resposta JSON com o array de projetos.
 }); // Rota que cadastra projetos, recebendo id e title.
+
+server.get('/projects', (req, res) => {
+  return res.json(projects);
+}); // Rota que lista todos os projetos e suas respectivas tarefas.
 
 server.listen(3000); // Escuta o servidor na porta 3000.

@@ -35,4 +35,22 @@ server.put('/projects/:id', (req, res) => {
   return res.json(projects); // Retorna a lista de projetos.
 }); // Rota que altera o título do projeto.
 
+server.delete('/projects/:id', (req, res) => {
+  const { id } = req.params;
+
+  const index = projects.map((project, index) => {
+    if (project.id == id) {
+      return index;
+    }
+  });
+
+  if (!index) {
+    return res.status(400).json({ error: "Invalid ID" })
+  }
+
+  projects.splice(index, 1);
+
+  return res.status(200);
+});
+
 server.listen(3000); // Escuta o servidor na porta 3000.

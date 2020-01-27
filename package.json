@@ -1,0 +1,9 @@
+{
+  "name": "Desafio01",
+  "version": "1.0.0",
+  "description": "Desafio proposto pela Rocketseat no bootcamp GoStack",
+  "main": "index.js",
+  "repository": "https://github.com/flaviohugo14/desafio01-GoStack.git",
+  "author": "Flávio Pangrácio <flaviohugo.14@gmail.com>",
+  "license": "MIT"
+}

@@ -6,6 +6,9 @@
   "repository": "https://github.com/flaviohugo14/desafio01-GoStack.git",
   "author": "Flávio Pangrácio <flaviohugo.14@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
   },

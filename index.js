@@ -22,4 +22,17 @@ server.get('/projects', (req, res) => {
   return res.json(projects);
 }); // Rota que lista todos os projetos e suas respectivas tarefas.
 
+server.put('/projects/:id', (req, res) => {
+  const { id } = req.params; // Recebe o id nos parâmetros da requisição.
+  const { title } = req.body; // Recebe o título do corpo da requisição.
+
+  projects.map(project => {
+    if (project.id == id) {
+      project.title = title;
+    }
+  }); // Percorre todos os elementos do array de projetos e modifica o titulo do projeto com mesmo id dos parametros.
+
+  return res.json(projects); // Retorna a lista de projetos.
+}); // Rota que altera o título do projeto.
+
 server.listen(3000); // Escuta o servidor na porta 3000.

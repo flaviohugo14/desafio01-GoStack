@@ -36,13 +36,24 @@ server.put('/projects/:id', (req, res) => {
 }); // Rota que altera o título do projeto.
 
 server.delete('/projects/:id', (req, res) => {
+  const { id } = req.params; // Recebe o id nos parâmetros da requisição.
+
+  const pindex = projects.findIndex(project => project.id == id); // Retorna o index que está atrelado ao projeto com id passado nos params.
+
+  projects.splice(pindex, 1); // remove 1 elemento à partir do index informado.
+
+  return res.send();
+}); // Rota que deleta projetos
+
+server.post('/projects/:id/tasks', (req, res) => {
   const { id } = req.params;
+  const { title } = req.body;
 
   const pindex = projects.findIndex(project => project.id == id);
 
-  projects.splice(pindex, 1);
+  projects[pindex].tasks.push(title);
 
-  return res.send();
+  return res.json(projects);
 });
 
 server.listen(3000); // Escuta o servidor na porta 3000.

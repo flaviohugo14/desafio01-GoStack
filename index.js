@@ -38,19 +38,11 @@ server.put('/projects/:id', (req, res) => {
 server.delete('/projects/:id', (req, res) => {
   const { id } = req.params;
 
-  const index = projects.map((project, index) => {
-    if (project.id == id) {
-      return index;
-    }
-  });
+  const pindex = projects.findIndex(project => project.id == id);
 
-  if (!index) {
-    return res.status(400).json({ error: "Invalid ID" })
-  }
+  projects.splice(pindex, 1);
 
-  projects.splice(index, 1);
-
-  return res.status(200);
+  return res.send();
 });
 
 server.listen(3000); // Escuta o servidor na porta 3000.

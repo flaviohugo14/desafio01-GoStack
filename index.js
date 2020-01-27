@@ -7,6 +7,10 @@ server.use(express.json()); // Define que o servidor use a estrutura de dados JS
 const projects = []; // Array de projetos, salvo em memória.
 let numberOfRequisitions = 0; // Armazena o número de requisições feitas.
 
+function findIndexOfProject(id){
+  return projects.findIndex(project => project.id == id);
+} // Retorna o index que está atrelado ao projeto com id passado nos params.
+
 server.use((req, res, next) => {
   numberOfRequisitions++; // Increnta a variável com o número de requisições.
   console.log(`Requisições feitas: ${numberOfRequisitions}`); // Imprime o número de requisições.
@@ -58,20 +62,16 @@ server.put('/projects/:id', projectExisted,(req, res) => {
 server.delete('/projects/:id', projectExisted, (req, res) => {
   const { id } = req.params; // Recebe o id nos parâmetros da requisição.
 
-  const pIndex = projects.findIndex(project => project.id == id); // Retorna o index que está atrelado ao projeto com id passado nos params.
-
-  projects.splice(pIndex, 1); // remove 1 elemento à partir do index informado.
+  projects.splice(findIndexOfProject(id), 1); // remove 1 elemento à partir do index informado.
 
   return res.send();
 }); // Rota que deleta projetos
 
-server.post('/projects/:id/tasks', (req, res) => {
+server.post('/projects/:id/tasks', projectExisted,(req, res) => {
   const { id } = req.params; // Recebe o id nos parâmetros da requisição.
   const { title } = req.body; // Recebe o campo title do corpo da requisição.
 
-  const pIndex = projects.findIndex(project => project.id == id); // Retorna o index que está atrelado ao projeto com id passado nos params.
-
-  projects[pIndex].tasks.push(title); // Adiciona tarefa no array de tarefas, dentro do projeto com id passado pelos params.
+  projects[findIndexOfProject(id)].tasks.push(title); // Adiciona tarefa no array de tarefas, dentro do projeto com id passado pelos params.
 
   return res.json(projects);
 }); // Rota que adiociona tarefas à projetos.

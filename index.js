@@ -7,7 +7,7 @@ server.use(express.json()); // Define que o servidor use a estrutura de dados JS
 const projects = []; // Array de projetos, salvo em memória.
 
 server.post('/projects', (req, res) => {
-  const { id, title } = req.params; // Pega variáveis do corpo da requisição.
+  const { id, title } = req.body; // Pega variáveis do corpo da requisição.
   const project = {
     id,
     title,

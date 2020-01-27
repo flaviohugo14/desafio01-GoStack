@@ -8,23 +8,23 @@ const projects = []; // Array de projetos, salvo em memória.
 let numberOfRequisitions = 0; // Armazena o número de requisições feitas.
 
 server.use((req, res, next) => {
-  numberOfRequisitions++;
-  console.log(`Requisições feitas: ${numberOfRequisitions}`);
-  next();
-});
+  numberOfRequisitions++; // Increnta a variável com o número de requisições.
+  console.log(`Requisições feitas: ${numberOfRequisitions}`); // Imprime o número de requisições.
+  next(); // Invoca o próximo middleware.
+}); // 
 
 function projectExisted(req, res, next){
-  const { id } = req.params;
+  const { id } = req.params; // Recebe o id dos params da requisição
 
-  const project = projects.find(project => project.id == id);
+  const project = projects.find(project => project.id == id); // Retorna o projeto esperado, do array de projetos.
 
   if (!project) {
-    return res.status(400).json({ error: 'Invalid ID'});
+    return res.status(400).json({ error: 'Invalid ID'}); // retorna um erro, se o projeto não receber nenhum valor.
   }
   else {
-    next();
+    next(); // invoca o próximo middleware.
   }
-}
+} // Middleware que verifica se o projeto com o id passando nos parâmetros existe no array de projetos.
 
 server.post('/projects', (req, res) => {
   const { id, title } = req.body; // Pega variáveis do corpo da requisição.

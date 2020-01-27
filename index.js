@@ -5,6 +5,13 @@ const server = express(); // Incorpora a função do Express na variável server
 server.use(express.json()); // Define que o servidor use a estrutura de dados JSON por padrão
 
 const projects = []; // Array de projetos, salvo em memória.
+let numberOfRequisitions = 0; // Armazena o número de requisições feitas.
+
+server.use((req, res, next) => {
+  numberOfRequisitions++;
+  console.log(`Requisições feitas: ${numberOfRequisitions}`);
+  next();
+});
 
 function projectExisted(req, res, next){
   const { id } = req.params;
